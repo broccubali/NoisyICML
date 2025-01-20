@@ -6,7 +6,7 @@ from tqdm import tqdm
 from scipy.stats import skewnorm
 import scipy
 
-a = loadmat("/home/shusrith/projects/torch/NoisyICML/burgers_shock_IC_sinpi.mat")
+a = loadmat("data/matlab-generated.mat")
 x = a["x"]
 u = a["usol"].T
 t = a["t"]
@@ -44,6 +44,6 @@ data = skewnorm.rvs(a=1, scale=0.2, size=u[:, 0].shape)
 u[:, 0] += data
 data = skewnorm.rvs(a=1, scale=0.2, size=u[:, -1].shape)
 u[:, -1] += data
-visualize_burgers(x, u, "burgers_shock_IC_sinpi.gif")
+visualize_burgers(x, u, "noisy.gif")
 d = {"usol": u, "t": t, "x": x}
 scipy.io.savemat("noisy.mat", d)
