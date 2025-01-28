@@ -4,7 +4,7 @@ from matplotlib.animation import FuncAnimation, PillowWriter
 from scipy.stats import skewnorm
 
 
-c = 1.0  # Wave speed
+c = 2.0  # Wave speed
 x_min, x_max = -1.0, 1.0  # Spatial domain
 t_min, t_max = 0.0, 2.0   # Temporal domain
 num_x, num_t = 256, 500   # Grid resolution
@@ -21,8 +21,8 @@ U = np.zeros((num_x, num_t))  # Solution array
 U[:, 0] = u0
 U[:, 1] = u0 + dt * u1  # First time step using forward Euler
 
-noise = skewnorm.rvs(a = 10, loc = 1.6, scale = 15, size = U.shape)
-U *= noise
+noise = skewnorm.rvs(a = 1, loc = 0, scale = 0.2, size = U.shape)
+U += noise
 
 # Time-stepping loop (finite difference)
 for n in range(1, num_t - 1):

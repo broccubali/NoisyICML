@@ -21,7 +21,7 @@ class PINN(nn.Module):
         self.layers.append(nn.Linear(hidden_size, output_size))
         self.loss = nn.MSELoss()
         self.c = nn.Parameter(torch.tensor([1.0], dtype=torch.float32, device="cuda"))
-        self.optimizer = torch.optim.Adam(self.parameters(), lr=1e-5)
+        self.optimizer = torch.optim.Adam(self.parameters(), lr=1e-3)
 
     def forward(self, x):
         for layer in self.layers:
