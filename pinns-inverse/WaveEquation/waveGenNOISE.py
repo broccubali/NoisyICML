@@ -21,8 +21,8 @@ U = np.zeros((num_x, num_t))  # Solution array
 U[:, 0] = u0
 U[:, 1] = u0 + dt * u1  # First time step using forward Euler
 
-noise = skewnorm.rvs(a = 5, loc = 0, scale = 0.4, size = U.shape)
-U += noise
+noise = skewnorm.rvs(a = 10, loc = 1.6, scale = 15, size = U.shape)
+U *= noise
 
 # Time-stepping loop (finite difference)
 for n in range(1, num_t - 1):
