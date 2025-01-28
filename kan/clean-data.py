@@ -1,7 +1,7 @@
 import h5py
 import numpy as np
 
-with h5py.File("simulation_data.hdf", "r") as f:
+with h5py.File("simulation_data.h5", "r+") as f:
     l = list(f.keys())
     e = []
     d = []
@@ -14,17 +14,16 @@ with h5py.File("simulation_data.hdf", "r") as f:
         except:
             print(i)
     d = np.array(d)
+    data = d[:, 0, :, :]
+    valid_data_indices = []
+    e = np.array(e)
+    for i in range(len(data)):
+        for j in range(data.shape[1]):
+            if any(data[i, j, :] > 2):
+                valid_data_indices.append(i)
+                break
+    print(e[valid_data_indices])
+    for i in e[valid_data_indices]:
+        del f[i]
     f.close()
-data = d[:, 0, :, :]
-valid_data_indices = []
-e = np.array(e)
-for i in range(len(data)):
-    for j in range(data.shape[1]):
-        if any(data[i, j, :] > 2):
-            valid_data_indices.append(i)
-            break
 
-print(
-    "Time steps with more than 5 non-zero points at any position:", valid_data_indices
-)
-print(e[valid_data_indices])

@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib import animation
 from tqdm import tqdm
-
+import h5py
 def visualize_burgers(xcrd, data, path):
     """
     This function animates the Burgers equation
