@@ -30,6 +30,7 @@ loader = torch.utils.data.DataLoader(dataset, batch_size=3072, shuffle=True)
 scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
     optimizer, mode="min", factor=0.1, patience=10
 )
+lr = optimizer.param_groups[0]["lr"]
 for i in range(1):
     for j in tqdm(loader):
         inp, out = j
@@ -39,6 +40,9 @@ for i in range(1):
         l.backward()
         optimizer.step()
     scheduler.step(l)
+    if lr != optimizer.param_groups[0]["lr"]:
+        lr = optimizer.param_groups[0]["lr"]
+        print("Learning rate changed to", lr)
     print(i, l.item())
 
 a = train[:1024].view(-1, 201)
