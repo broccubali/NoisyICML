@@ -2,7 +2,6 @@ import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib import animation
 from tqdm import tqdm
-import h5py
 
 def visualize_burgers(xcrd, data, path):
     """
@@ -27,7 +26,3 @@ def visualize_burgers(xcrd, data, path):
     writer = animation.PillowWriter(fps=15, bitrate=1800)
     ani.save(path, writer=writer)
     plt.close(fig)
-
-# with h5py.File("simulation_data.hdf", "r") as f:
-#     a = f["41"]["clean"][:]
-#     visualize_burgers([i for i in range(1024)], a, "test.gif")
