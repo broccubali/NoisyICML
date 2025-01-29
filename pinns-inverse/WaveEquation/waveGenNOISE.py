@@ -4,7 +4,7 @@ from matplotlib.animation import FuncAnimation, PillowWriter
 from scipy.stats import skewnorm
 
 
-c = 1.0  # Wave speed
+c = 2.0  # Wave speed
 x_min, x_max = -1.0, 1.0  # Spatial domain
 t_min, t_max = 0.0, 2.0   # Temporal domain
 num_x, num_t = 256, 500   # Grid resolution

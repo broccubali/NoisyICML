@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation, PillowWriter
 
-k = 5.0  # Wavenumber
+k = 1.0  # Wavenumber
 x_min, x_max = -1.0, 1.0  # Spatial domain
 t_min, t_max = 0.0, 1.0   # Temporal domain
 num_x, num_t = 256, 100   # Number of points in x and t
@@ -13,7 +13,7 @@ t = np.linspace(t_min, t_max, num_t)
 U_exact = np.sin(k * x[:, None]) * np.cos(k * t[None, :])
 
 # Save the data
-np.save("/home/pes1ug22am100/Documents/Research and Experimentation/NoisyICML/pinns-inverse/Helmholtz/helmholtz_solution.npy", U_exact)
+np.save("/home/pes1ug22am100/Documents/Research and Experimentation/NoisyICML/pinns-inverse/Helmholtz/helmholtz_solution1.npy", U_exact)
 np.save("/home/pes1ug22am100/Documents/Research and Experimentation/NoisyICML/pinns-inverse/Helmholtz/x_coordinate.npy", x)
 np.save("/home/pes1ug22am100/Documents/Research and Experimentation/NoisyICML/pinns-inverse/Helmholtz/t_coordinate.npy", t)
 
