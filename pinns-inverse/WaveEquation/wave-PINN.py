@@ -81,9 +81,9 @@ model = PINN(input_size=2, hidden_size=20, output_size=1).to("cuda")
 # print(model)
 
 # u = np.load("/home/pes1ug22am100/Documents/Research and Experimentation/NoisyICML/pinns-inverse/WaveEquation/wave_solution.npy")
-u = np.load("/home/pes1ug22am100/Documents/Research and Experimentation/NoisyICML/pinns-inverse/WaveEquation/wave_solution_noise.npy")
-x = np.load("/home/pes1ug22am100/Documents/Research and Experimentation/NoisyICML/pinns-inverse/WaveEquation/x_coordinate.npy")
-t = np.load("/home/pes1ug22am100/Documents/Research and Experimentation/NoisyICML/pinns-inverse/WaveEquation/t_coordinate.npy")[:-1]
+u = np.load("WaveEquation/wave_solution_noise.npy")
+x = np.load("WaveEquation/x_coordinate.npy")
+t = np.load("WaveEquation/t_coordinate.npy")[:-1]
 
 X, T = np.meshgrid(x, t)
 xtrue = np.hstack((X.flatten()[:, None], T.flatten()[:, None]))
