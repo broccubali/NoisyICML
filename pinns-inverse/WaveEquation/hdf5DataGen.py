@@ -5,7 +5,7 @@ from scipy.stats import skewnorm
 def newData(c, f):
     x_min, x_max = -1.0, 1.0  # Spatial domain
     t_min, t_max = 0.0, 2.0   # Temporal domain
-    num_x, num_t = 256, 500   # Grid resolution
+    num_x, num_t = 1024, 201   # Grid resolution
     dx = (x_max - x_min) / (num_x - 1)
     dt = 0.9 * dx / c  # CFL condition for stability
 
@@ -37,15 +37,27 @@ def newData(c, f):
             + c**2 * dt**2 / dx**2 * (U_noise[2:, n] - 2 * U_noise[1:-1, n] + U_noise[:-2, n])
         )
 
-    # Store data for each c in the HDF5 file under unique names
-    f.create_dataset(f"U_clean_{c}", data=U_clean)
-    f.create_dataset(f"U_noise_{c}", data=U_noise)
-    f.create_dataset(f"x_coordinate_{c}", data=x)
-    f.create_dataset(f"t_coordinate_{c}", data=t)
+    # Remove the singleton dimension
+    U_clean = U_clean.squeeze()  # Remove the second dimension (of size 1)
+    U_noise = U_noise.squeeze()  # Remove the second dimension (of size 1)
+
+    # Define the data type for the compound dataset (with fields 'clean' and 'noisy')
+    dt = np.dtype([
+        ('clean', np.float64, U_clean.shape),  # The shape of the clean data
+        ('noisy', np.float64, U_noise.shape)   # The shape of the noisy data
+    ])
+
+    # Create a compound dataset for each 'c' with 'clean' and 'noisy' fields
+    data = np.zeros(1, dtype=dt)
+    data['clean'] = U_clean
+    data['noisy'] = U_noise
+
+    # Store the compound dataset in the HDF5 file
+    f.create_dataset(f"wave_solution_{c}", data=data)
 
     print(f"Data for c = {c} generated and added to HDF5 file")
 
 # Open the HDF5 file once and write all datasets to it
-with h5py.File("/home/pes1ug22am100/Documents/Research and Experimentation/NoisyICML/pinns-inverse/WaveEquation/wave_solutions.h5", 'w') as f:
-    for c in range(1, 1001):
+with h5py.File("/home/pes1ug22am100/Documents/Research and Experimentation/NoisyICML/pinns-inverse/WaveEquation/wave_solutions_new.h5", 'w') as f:
+    for c in range(1, 963):
         newData(c, f)
