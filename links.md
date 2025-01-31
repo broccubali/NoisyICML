@@ -6,5 +6,6 @@
 
 - # KAN 
     - ### [Burgers](https://www.kaggle.com/models/shusrith/kan/pyTorch/thisshitworks)
+    - ### [Wave](https://www.kaggle.com/models/namitaachyuth/kan-wave)
     
     
