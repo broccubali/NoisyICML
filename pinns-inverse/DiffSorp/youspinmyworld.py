@@ -5,7 +5,6 @@ import h5py
 import matplotlib.pyplot as plt
 from tqdm import tqdm
 
-
 # Define the PINN model
 class PINN(nn.Module):
     def __init__(self, input_size, hidden_size, output_size):
@@ -37,24 +36,7 @@ class PINN(nn.Module):
     def residual_loss(self, xtrain):
         """Compute physics-based residual loss for the diffusion-sorption equation."""
         xtrain.requires_grad = True  # autograd for derivatives
-        # before it was 
-        # g = xtrain.clone()
-        # g.requires_grad = True
-        # this worked on the clone
 
-        # so just enable autograd for xtrain so it can track derivatives and compute gradients.
-        # By setting requires_grad = True directly on xtrain, we ensure that pytorh 
-        # tracks all operations on this original tensor which allows for efficient gradient computation.
-
-        # basically remember how we used to clone xtrain into g and set requires_grad = True on that clone?
-        # it involved unnecessary copying, which could lead to suboptimal gradient flow.
-        # This this is prolly why updates to the model's parameters were slower
-
-        # so now when we directly modify xtrain and enabling autograd on it
-        # we’re simplifying the computation graph whcih ensures better gradient tracking
-
-
-        
         # Predict concentration
         u_pred = self.forward(xtrain)
 
@@ -88,7 +70,7 @@ class PINN(nn.Module):
 
             self.optimizer.step()
 
-            if epoch % 200 == 0:
+            if epoch % 1000 == 0:
                 print(
                     f"Epoch {epoch}, Loss {total_loss.item():.6f}, "
                     f"Data Loss {data_loss.item():.6f}, Residual Loss {res_loss.item():.6f}, "
