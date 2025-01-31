@@ -5,6 +5,6 @@
     - ### [Wave](https://www.kaggle.com/datasets/namitaachyuth/wave-equation)
 
 - # KAN 
-    - ### [Burgers](https://www.kaggle.com/models/shusrith/kan)
+    - ### [Burgers](https://www.kaggle.com/models/shusrith/kan/pyTorch/thisshitworks)
     
     
