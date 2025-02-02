@@ -97,11 +97,9 @@ C_train = torch.tensor(C_all.flatten()[:, None], dtype=torch.float32).to("cuda")
 idx = np.random.choice(Nx * Nt, 10000, replace=False)
 xtrain, ctrain = X_train[idx], C_train[idx]
 
-# Train the model
 model = PINN(2, 20, 1).to("cuda")
 model.train_model(xtrain, ctrain, epochs=10000)
 
-# Evaluate the model
 with torch.no_grad():
     C_pred = model.forward(xtrain).cpu().numpy()
     C_pred = C_pred.reshape((Nx, 100))
