@@ -13,9 +13,15 @@ t = np.linspace(t_min, t_max, num_t)
 U_exact = np.sin(k * x[:, None]) * np.cos(k * t[None, :])
 
 # Save the data
+<<<<<<< HEAD:pde-gen/helmholtz/helmGen.py
 np.save("/home/pes1ug22am100/Documents/Research and Experimentation/NoisyICML/pinns-inverse/Helmholtz/helmholtz_solution1.npy", U_exact)
 np.save("/home/pes1ug22am100/Documents/Research and Experimentation/NoisyICML/pinns-inverse/Helmholtz/x_coordinate.npy", x)
 np.save("/home/pes1ug22am100/Documents/Research and Experimentation/NoisyICML/pinns-inverse/Helmholtz/t_coordinate.npy", t)
+=======
+np.save("pinns-inverse/Helmholtz/helmholtz_solution.npy", U_exact)
+np.save("pinns-inverse/Helmholtz/x_coordinate.npy", x)
+np.save("pinns-inverse/Helmholtz/t_coordinate.npy", t)
+>>>>>>> origin/siddhi:pinns-inverse/Helmholtz/helmGen.py
 
 fig, ax = plt.subplots(figsize=(8, 6))
 line, = ax.plot([], [], lw=2)
@@ -37,7 +43,7 @@ def update(frame):
 ani = FuncAnimation(fig, update, frames=num_t, init_func=init, blit=True)
 
 gif_writer = PillowWriter(fps=20)
-ani.save("/home/pes1ug22am100/Documents/Research and Experimentation/NoisyICML/pinns-inverse/Helmholtz/helmholtz_clean.gif", writer=gif_writer)
+ani.save("pinns-inverse/Helmholtz/helmholtz_clean.gif", writer=gif_writer)
 
 plt.close(fig)
 print("GIF saved as 'helmholtz_solution.gif'")

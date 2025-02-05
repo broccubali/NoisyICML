@@ -17,9 +17,9 @@ noise = skewnorm.rvs(a = 1, loc = 0, scale = 0.2, size = U_exact.shape)
 U_exact += noise
 
 # Save the data
-np.save("/home/pes1ug22am100/Documents/Research and Experimentation/NoisyICML/pinns-inverse/Helmholtz/helmholtz_noise.npy", U_exact)
-np.save("/home/pes1ug22am100/Documents/Research and Experimentation/NoisyICML/pinns-inverse/Helmholtz/x_coordinate.npy", x)
-np.save("/home/pes1ug22am100/Documents/Research and Experimentation/NoisyICML/pinns-inverse/Helmholtz/t_coordinate.npy", t)
+np.save("pinns-inverse/Helmholtz/helmholtz_noise.npy", U_exact)
+np.save("pinns-inverse/Helmholtz/x_coordinate.npy", x)
+np.save("pinns-inverse/Helmholtz/t_coordinate.npy", t)
 
 fig, ax = plt.subplots(figsize=(8, 6))
 line, = ax.plot([], [], lw=2)
@@ -41,7 +41,7 @@ def update(frame):
 ani = FuncAnimation(fig, update, frames=num_t, init_func=init, blit=True)
 
 gif_writer = PillowWriter(fps=20)
-ani.save("/home/pes1ug22am100/Documents/Research and Experimentation/NoisyICML/pinns-inverse/Helmholtz/helmholtz_noise.gif", writer=gif_writer)
+ani.save("pinns-inverse/Helmholtz/helmholtz_noise.gif", writer=gif_writer)
 
 plt.close(fig)
 print("GIF saved")
